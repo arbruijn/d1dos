@@ -275,4 +275,4 @@ void gr_restore_mode_vesa(void * buffer)
 	}
 	return;
 }
-
+

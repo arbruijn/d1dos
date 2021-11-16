@@ -327,4 +327,4 @@ void kmatrix_view(int network)
 	game_flush_inputs();
 }
 #endif
-
+

@@ -164,4 +164,4 @@ void ui_icon_do( UI_GADGET_ICON * icon, int keypress )
 	ui_draw_icon( icon );
 
 }
-
+

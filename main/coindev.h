@@ -116,4 +116,4 @@ unsigned int coindev_count(int CoinMechNumber);
 #define ARCADE_CONTINUE_SECONDS	60
 
 #endif
-
+

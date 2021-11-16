@@ -68,4 +68,4 @@ testt.obj: testt.c
 	wcc386 $(CCFLAGS) testt.c
 timer.obj: timer.asm
 	masm timer.asm
-
+

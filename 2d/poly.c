@@ -298,4 +298,4 @@ void gr_poly(int nverts, int *vert )
 }
 
 #endif
-
+

@@ -248,4 +248,4 @@ int slew_frame(int check_keys)
 	return do_slew_movement( slew_obj, !check_keys, 1 );
 
 }
-
+

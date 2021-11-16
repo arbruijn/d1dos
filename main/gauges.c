@@ -2280,4 +2280,4 @@ void update_laser_weapon_info(void)
 		old_weapon[0][VR_current_page] = -1;
 }
 
-
+

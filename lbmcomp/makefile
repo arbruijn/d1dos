@@ -20,4 +20,4 @@ LBMCOMP_LIBS = gr.lib misc.lib mem.lib iff.lib readfile.lib ui.lib io.lib func.l
 LBMCOMP_LFLAGS = option stack=150k
 
 
-
+

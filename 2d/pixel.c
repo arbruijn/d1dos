@@ -119,4 +119,4 @@ void gr_bm_pixel( grs_bitmap * bm, int x, int y, unsigned char color )
 	}
 }
 
-
+

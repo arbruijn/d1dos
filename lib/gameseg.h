@@ -216,4 +216,4 @@ extern void create_walls_on_side(segment *sp, int sidenum);
 extern void pick_random_point_in_seg(vms_vector *new_pos, int segnum);
 
 #endif
-
+

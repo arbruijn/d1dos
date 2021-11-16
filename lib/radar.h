@@ -44,4 +44,4 @@ COPYRIGHT 1993-1998 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
 void radar_render_frame();
 
 #endif
-
+

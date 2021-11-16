@@ -127,4 +127,4 @@ extern int check_trigger_sub(int trigger_num, int player_num);
 extern void triggers_frame_process();
 
 #endif
-
+

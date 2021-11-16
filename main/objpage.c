@@ -560,4 +560,3 @@ void objpage_do()
 		}
 	}
 }
-

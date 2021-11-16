@@ -504,4 +504,4 @@ void rls_stretch_scanline_setup( int XDelta, int YDelta )
       }
 
 }
-
+

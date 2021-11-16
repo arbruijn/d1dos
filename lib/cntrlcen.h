@@ -81,4 +81,4 @@ extern void do_controlcen_destroyed_stuff(object *objp);
 extern void do_controlcen_dead_frame(void);
 
 #endif
-
+

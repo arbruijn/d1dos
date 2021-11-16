@@ -2262,4 +2262,4 @@ int find_seg_side_face(short x,short y,int *seg,int *side,int *face,int *poly)
 }
 
 #endif
-
+

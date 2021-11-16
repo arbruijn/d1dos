@@ -332,4 +332,4 @@ char *pcx_errormsg(int error_number)
 	return p;
 
 }
-
+

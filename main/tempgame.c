@@ -3504,4 +3504,4 @@ void powerup_grab_cheat_all(void)
 	objnum = segp->objects;
 
 	while (
-
+

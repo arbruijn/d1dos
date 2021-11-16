@@ -610,4 +610,4 @@ void obj_attach(object *parent,object *sub);
 extern void create_small_fireball_on_object(object *objp, fix size_scale, int sound_flag);
 
 #endif
-
+

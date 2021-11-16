@@ -928,4 +928,4 @@ void set_all_modes_to_hover(void)
 			Objects[i].ctype.ai_info.behavior = AIB_STILL;
 }
 
-
+

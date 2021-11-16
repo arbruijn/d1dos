@@ -71,4 +71,4 @@ int state_get_save_file(char * fname, char * dsc, int multi );
 int state_get_restore_file(char * fname, int multi );
 
 #endif
-
+

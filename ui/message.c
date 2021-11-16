@@ -229,4 +229,4 @@ int MessageBox( short xc, short yc, int NumButtons, char * text, ... )
 	return MessageBoxN( xc, yc, NumButtons, text, Button );
 	
 }
-
+

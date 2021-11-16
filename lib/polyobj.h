@@ -200,4 +200,4 @@ extern bitmap_index texture_list_index[MAX_POLYOBJ_TEXTURES];
 extern g3s_point robot_points[];
 
 #endif
-
+

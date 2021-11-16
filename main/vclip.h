@@ -169,4 +169,4 @@ draw_vclip_object(object *obj,fix timeleft,int lighted, int vclip_num);
 extern void draw_weapon_vclip(object *obj);
 
 #endif
-
+

@@ -321,4 +321,4 @@ void gr_upoly_tmap_ylr(int nverts, int *vert, void *ylr_func() )
 	texture_map_flat(&my_tmap, COLOR);
 }
 
-
+

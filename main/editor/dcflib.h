@@ -64,4 +64,4 @@ COPYRIGHT 1993-1998 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
 // Closes 'cfile'. Frees all memory associated with file.
 
 #endif
-
+

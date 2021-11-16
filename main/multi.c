@@ -2906,4 +2906,4 @@ void use_netplayer_stats( player * ps, netplayer_stats *pd )
 	ps->hostages_total=pd->hostages_total;					// Total number of hostages.
 	ps->hostages_on_board=pd->hostages_on_board;			//	Number of hostages on ship.
 }
-
+

@@ -117,4 +117,4 @@ void draw_weapon_vclip(object *obj)
 
 }
 
-
+

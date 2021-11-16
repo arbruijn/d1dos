@@ -48,4 +48,4 @@ void mcockpit_find_extents( grs_bitmap * bmp, int *minx, int *miny, int *maxx, i
 */
 
 #endif
-
+

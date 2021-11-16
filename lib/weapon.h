@@ -278,4 +278,4 @@ int pick_up_primary(int weapon_index);
 pick_up_ammo(int class_flag,int weapon_index,int ammo_count);
 
 #endif
-
+

@@ -40,4 +40,4 @@ int new_lzw_compress( ubyte *outputbuf, ubyte *inputbuf, int input_size );
 int new_lzw_expand( ubyte *outputbuf, ubyte *inputbuf );
 
 #endif
-
+

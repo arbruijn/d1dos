@@ -88,4 +88,4 @@ extern char * get_briefing_screen( int level_num );
 
 
 #endif
-
+

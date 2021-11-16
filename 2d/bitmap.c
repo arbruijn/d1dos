@@ -298,4 +298,4 @@ void gr_bitmap_check_transparency( grs_bitmap * bmp )
 	bmp->bm_flags = 0;
 
 }
-
+

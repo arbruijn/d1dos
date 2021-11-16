@@ -408,4 +408,3 @@ extern int do_object_dialog();
 // In editor\hostage.c
 extern int do_hostage_dialog();
 
-

@@ -122,4 +122,4 @@ num_iters = num_iters + 1
 	extern _fx_xleft:dword
 	extern _fx_xright:dword
 	extern _pixptr:dword
-
+

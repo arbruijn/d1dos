@@ -25,4 +25,4 @@ cfile.obj: cfile.h cfile.c
 
 test.obj: test.c
 	wcc386 $(CCFLAGS) test.c
-
+

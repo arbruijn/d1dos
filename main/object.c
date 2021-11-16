@@ -2306,4 +2306,4 @@ void obj_detach_all(object *parent)
 		obj_detach_one(&Objects[parent->attached_obj]);
 }
 
-
+

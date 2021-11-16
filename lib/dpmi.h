@@ -102,4 +102,4 @@ extern unsigned int dpmi_physical_memory;
 extern unsigned int dpmi_dos_memory;
 
 #endif
-
+

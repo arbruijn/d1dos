@@ -99,4 +99,4 @@ void gamefont_close()
 	}
 
 }
-
+

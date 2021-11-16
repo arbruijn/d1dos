@@ -52,4 +52,3 @@
 // Closes 'cfile'. Frees all memory associated with file.
 
 #endif
-

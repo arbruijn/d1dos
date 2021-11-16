@@ -736,4 +736,4 @@ int update_player_file()
 
 	return write_player_file();
 }
-
+

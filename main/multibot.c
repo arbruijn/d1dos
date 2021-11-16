@@ -1166,4 +1166,4 @@ void multi_robot_request_change(object *robot, int player_num)
 
 #endif
 #endif
-
+

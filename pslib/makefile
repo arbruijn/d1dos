@@ -68,4 +68,4 @@ pslib.obj: cflib.h conio.h ctype.h dos.h fcntl.h i86.h library.h mem.h \
 
 readfile.obj: errno.h error.h fcntl.h io.h mem.h readfile.h stat.h stdio.h \
 	 stdlib.h string.h types.h
-
+

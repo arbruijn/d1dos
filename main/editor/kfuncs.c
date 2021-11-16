@@ -492,4 +492,4 @@ void init_med_functions()
 	func_init(med_functions, (sizeof(med_functions)/sizeof(FUNCTION))-1 );
 }
 
-
+

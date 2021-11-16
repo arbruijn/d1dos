@@ -245,4 +245,4 @@ extern ubyte Sounds[MAX_SOUNDS];
 extern ubyte AltSounds[MAX_SOUNDS];
 
 #endif
-
+

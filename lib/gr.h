@@ -547,4 +547,4 @@ extern void gr_merge_textures_3( ubyte * lower, ubyte * upper, ubyte * dest );
 
 #endif
 
-
+

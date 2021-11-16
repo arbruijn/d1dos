@@ -125,4 +125,4 @@ tmapv.obj: tmapv.asm
 	masm tmapv.asm
 tmapz.obj: tmapz.asm
 	masm tmapz.asm
-
+

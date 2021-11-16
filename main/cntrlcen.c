@@ -404,4 +404,4 @@ void init_controlcen_for_level(void)
 	Dead_controlcen_object_num = -1;
 }
 
-
+

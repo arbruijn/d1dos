@@ -249,4 +249,4 @@ void restart_effect(int effect_num)
 	//Assert(Effects[effect_num].bm_ptr != -1);
 }
 
-
+

@@ -596,4 +596,4 @@ void rotate_bitmap(grs_bitmap *bp, grs_point *vertbuf, int light_value)
 
 
 #endif 		// USE_ROLLER
-
+

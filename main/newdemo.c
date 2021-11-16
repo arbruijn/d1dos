@@ -3751,4 +3751,4 @@ void newdemo_strip_frames(char *outname, int bytes_to_strip)
 }
 
 #endif
-
+

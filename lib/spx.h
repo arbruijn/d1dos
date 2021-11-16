@@ -64,4 +64,4 @@ extern void ipx_send_packet_data( ubyte * data, int datasize, ubyte *address );
 #define IPX_MAX_DATA_SIZE (534-4)
 
 #endif
-
+

@@ -126,4 +126,4 @@ void ui_barbox_close()
 	if (wnd)
 		ui_close_window(wnd);
 }
-
+

@@ -524,4 +524,4 @@ fix vm_dist_to_plane(vms_vector *checkp,vms_vector *norm,vms_vector *planep);
 
 #endif
 
-
+

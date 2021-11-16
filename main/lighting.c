@@ -485,4 +485,4 @@ fix compute_object_light(object *obj,vms_vector *rotated_pnt)
 }
 
 
-
+

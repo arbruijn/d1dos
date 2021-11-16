@@ -436,4 +436,4 @@ skip1:	inc	edi				; go to next pixel address
 	add	ecx,[_fx_dz_dx]			; increment z
 	je	_div_0_abort			; would be dividing by 0, so abort
 endm
-
+

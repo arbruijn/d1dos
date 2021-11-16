@@ -273,4 +273,4 @@ extern player Players[MAX_PLAYERS];				// Misc player info
 extern player_ship *Player_ship;
 
 #endif
-
+

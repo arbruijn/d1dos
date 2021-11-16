@@ -89,4 +89,4 @@ void cfile_use_alternate_hogfile( char * name );
 void cfile_use_alternate_hogdir( char * path );
 
 #endif
-
+

@@ -40,4 +40,4 @@ COPYRIGHT 1993-1998 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
 extern void sort_seg_list(int n_segs,short *segnumlist,vms_vector *pos);
 
 #endif
-
+

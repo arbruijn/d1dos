@@ -18,4 +18,3 @@ CLEAN_TARGS =
 
 #all Miner makefiles should include this
 %include $(INIT)\makefile.def
-

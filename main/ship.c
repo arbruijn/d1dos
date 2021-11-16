@@ -67,4 +67,4 @@ void ship_energy_empty()
 }
 
 
-
+

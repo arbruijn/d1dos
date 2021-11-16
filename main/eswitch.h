@@ -52,4 +52,3 @@ extern void do_trigger_window();
 
 #endif
 
-

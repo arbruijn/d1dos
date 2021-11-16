@@ -28,4 +28,3 @@
 extern void sort_seg_list(int n_segs,short *segnumlist,vms_vector *pos);
 
 #endif
-

@@ -53,4 +53,4 @@ extern char config_last_player[CALLSIGN_LEN+1];
 extern char config_last_mission[];
 
 #endif
-
+

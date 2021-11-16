@@ -39,4 +39,4 @@ extern void gr_grey_canvas();
 extern void effect2d_headlight_copy( grs_bitmap * src_bmp, grs_bitmap * dest_bmp, grs_bitmap * mask_bmp );
 
 #endif
-
+

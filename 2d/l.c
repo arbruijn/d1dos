@@ -63,4 +63,4 @@ void gr_bm_ubitblt02_2x(int w, int h, int dx, int dy, int sx, int sy, grs_bitmap
 	}
 }
 
-
+

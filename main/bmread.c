@@ -1996,4 +1996,4 @@ void bm_write_all(FILE *fp)
 }
 
 #endif
-
+

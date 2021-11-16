@@ -46,4 +46,4 @@ ubyte	*	gr_ibitblt_create_mask ( grs_bitmap * mask_bmp, int sx, int sy, int sw, 
 void 		gr_ibitblt (grs_bitmap * source_bmp, grs_bitmap * dest_bmp, ubyte * mask );
 
 #endif
-
+

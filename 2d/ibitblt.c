@@ -373,4 +373,4 @@ void	gr_ibitblt_find_hole_size( grs_bitmap * mask_bmp, int *minx, int *miny, int
 		Error( "Bitmap for ibitblt doesn't have transparency!\n" );
 	}
 }
-
+

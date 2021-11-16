@@ -131,4 +131,4 @@ find_hitpoint_uv(fix *u,fix *v,vms_vector *pnt,segment *seg,int sidenum,int face
 int object_intersects_wall(object *objp);
 
 #endif
-
+

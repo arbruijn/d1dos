@@ -72,4 +72,4 @@ extern int gr_find_closest_color_current( int r, int g, int b );
 extern void gr_palette_read(ubyte * palette);
 
 #endif
-
+

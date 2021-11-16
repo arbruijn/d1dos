@@ -475,4 +475,4 @@ void mediancut( WORD * data, int num_pixels, int num_colors, void * dest_bitmap,
 //	MedianPutImage( data, dest_bitmap, TotalPixels );
 }
 
-
+

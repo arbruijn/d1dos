@@ -31,4 +31,3 @@ extern void hostage_close_window();
 extern void do_hostage_window();
 
 #endif
-

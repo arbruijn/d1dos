@@ -784,4 +784,4 @@ draw_model_picture(int mn,vms_angvec *orient_angles)
 	gr_free_canvas(temp_canv);
 }
 
-
+

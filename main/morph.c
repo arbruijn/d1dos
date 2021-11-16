@@ -570,4 +570,4 @@ void draw_morph_object(object *obj)
 	#endif
 
 }
-
+

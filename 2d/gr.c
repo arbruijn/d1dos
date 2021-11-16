@@ -723,4 +723,4 @@ int gr_check_mode(int mode)
 	}
 	return 11;
 }
-
+

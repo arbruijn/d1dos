@@ -34,4 +34,4 @@ extern void gr_deaccent_canvas();
 extern void gr_grey_canvas();
 extern void effects_headlight_copy( grs_bitmap * src_bmp, grs_bitmap * dest_bmp, grs_bitmap * mask_bmp );
 
-
+

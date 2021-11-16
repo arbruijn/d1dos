@@ -786,4 +786,4 @@ void joy_poll()
 	if ( joystick.slow_read & JOY_BIOS_READINGS )	
 		joystick.last_value = joy_read_buttons_bios();
 }
-
+

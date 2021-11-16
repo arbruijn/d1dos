@@ -572,4 +572,4 @@ void objpage_do()
 		}
 	}
 }
-
+

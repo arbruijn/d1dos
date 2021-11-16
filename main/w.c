@@ -24,4 +24,4 @@ COPYRIGHT 1993-1998 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
 
     extControl.altTurn = MUL(yaw,TOFIXED(1.02));
     basisYaw = td.euler.y;
-
+
