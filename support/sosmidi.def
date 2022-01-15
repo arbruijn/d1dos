@@ -1,0 +1,19 @@
+#lib sosmwxcr.lib
+#textalign byte
+SOSMCAPS sosMIDICaps_Start_:sosMIDICaps_End_+21
+SOSMCBCK sosMIDICbck_Start_:sosMIDICbck_End_+21
+SOSMDATA 0:0, 0:0, _sosMIDIData_Start:_sosMIDIData_End+4
+SOSMDIGI sosMIDIDigi_Start_:sosMIDIDigi_End_+21,0:0,0:0,_lpWAVEHeader-12:_lpWAVEHeader-2
+SOSMDQ sosMIDIDq_Start_:sosMIDIDq_End_+21
+sosmdrv _sosMIDIDRVGetCapsInfo:_xgetES+6 #textalign dword
+SOSMDONE sosMIDIDone_Start_:sosMIDIDone_End_+21
+SOSMINIT sosMIDIInit_Start_:sosMIDIInit_End_+21 #symofs __bSOSMIDIDeviceChannelActive-0a0000h
+SOSMINS sosMIDIIns_Start_:sosMIDIIns_End_+21
+SOSMLOAD sosMIDILoad_Start_:sosMIDILoad_End_+21
+SOSMPAUS sosMIDIPause_Start_:sosMIDIPause_End_+21
+SOSMPTR sosMIDIPtr_Start_:sosMIDIPtr_End_+21
+SOSMSONG sosMIDISong_Start_:sosMIDISong_End_+21
+SOSMST sosMIDISt_Start_:sosMIDISt_End_+21
+SOSMTMPO sosMIDITmpo_Start_:sosMIDITmpo_End_+21
+SOSMTMR sosMIDITmr_Start_:sosMIDITmr_End_+21
+SOSMWAVE _waveSendData:_waveGetBestSample+0x137,0:0,__wSOSWAVEInsDataSet:_waveDIGIMIDIHandle+0x20,_lpWAVEHeader:_lpWAVEStartSample+6

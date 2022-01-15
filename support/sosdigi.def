@@ -1,0 +1,16 @@
+#lib sosdwxcr.lib
+#textalign byte
+SOSCAPS sosDIGICaps_Start_:sosDIGICaps_End_+21
+SOSCNTL sosDIGICntl_Start_:sosDIGICntl_End_+21
+SOSDATA 0:0, _sos_msg_0:_sos_msg_0+0x1e6, __sosDIGIData_Start:__sosDIGIData_End+4
+SOSDETEC sosDIGIDetec_Start_:sosDIGIDetec_End_+21, _sos_detec_drv:_sos_detec_drv+11
+SOSDONE sosDIGIDone_Start_:sosDIGIDone_End_+21
+sosdrv _sosDIGIDrv_Start:_sosDIGIDrv_End+1, 0:0, __sosDIGIData2_Start:_sos_drv_4+2 #textalign dword
+SOSERR sosDIGIErr_Start_:sosDIGIErr_End_+21
+SOSINIT sosDIGIInit_Start_:sosDIGIInit_End_+21
+SOSLOAD sosDIGILoad_Start_:sosDIGILoad_End_+21, _sos_load_drv:_sos_load_drv+11
+SOSPLYNG sosDIGIPlyng_Start_:sosDIGIPlyng_End_+21
+SOSRATE sosDIGIRate_Start_:sosDIGIRate_End_+21
+SOSSTART sosDIGIStart_Start_:sosDIGIStart_End_+21
+sostimer _sosDIGITimer_Start:_sosDIGITimer_End+1, 0:0, __sosDIGIData1_Start:__sosDIGIData1_End+4 #textalign dword
+SOSTMR sosDIGITmr_Start_:sosDIGITmr_End_+21
