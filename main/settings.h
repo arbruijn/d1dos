@@ -18,7 +18,7 @@ COPYRIGHT 1993-1998 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
 #define NEWDEMO			//Demo is always IN 
 
 //#define EDITOR			//Editor is OUT 
-//#define RELEASE			//This IS a release version 
+#define RELEASE	1		//This IS a release version 
 //#define ARCADE			//Arcade (ATW) code is OUT 
 //#define DEMO_ONLY		//Game is playable 
 //#define NDEBUG  1			//NDEBUG is ON 

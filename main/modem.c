@@ -203,7 +203,7 @@ static char rcsid[] = "$Id: modem.c 2.13 1995/11/28 16:25:05 john Exp $";
 #include <time.h>
 #include <io.h>
 
-//#include "fast.h" // Commlib stuff //Don't have fast.h -KRB
+#include "fast.h"
 #include "game.h"
 #include "scores.h"
 #include "modem.h"
@@ -222,8 +222,8 @@ static char rcsid[] = "$Id: modem.c 2.13 1995/11/28 16:25:05 john Exp $";
 #include "netmisc.h"
 #include "fuelcen.h"
 #include "dpmi.h"
-//#include "commlib.h" -Don't have these either! -KRB
-//#include "glfmodem.h" -Don't have these either! -KRB
+#include "commlib.h"
+#include "glfmodem.h"
 #include "multi.h"
 #include "timer.h"
 #include "text.h"
@@ -233,9 +233,6 @@ static char rcsid[] = "$Id: modem.c 2.13 1995/11/28 16:25:05 john Exp $";
 #include "digi.h"
 #include "multibot.h"
 #include "args.h"
-
-//This include is just to allow compiling. It doesn't mean it will work. Values in here are only dummy values
-#include "nocomlib.h"
 
 #define MIN_COMM_GAP 8000
 #define INIT_STRING_LEN 20

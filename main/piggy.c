@@ -361,10 +361,6 @@ static char rcsid[] = "$Id: piggy.c 2.10 1995/10/07 13:17:26 john Exp $";
 #include "screens.h"
 
 //#include "soscomp.h"
-//The above include is part of a commercial 
-//sound library, so it cannot be included in a public 
-//release of the source code. -KRB
-#include "no_sos.h" //Added by KRB
 
 #include "piggy.h"
 #include "texmerge.h"

@@ -794,8 +794,7 @@ int convert_rgb15(grs_bitmap *bm,iff_bitmap_header *bmheader)
 
 //        if ((new_data = malloc(bm->bm_w * bm->bm_h * 2)) == NULL)
 //            {ret=IFF_NO_MEM; goto done;}
-       //MALLOC(new_data, ushort, bm->bm_w * bm->bm_h * 2);//hack by KRB also a bug I believe. It is allocating twice the needed memory.
-		new_data = malloc(bm->bm_w * bm->bm_h * 2);//I left it as previously done, thinking the *2 means sizeof(ushort)
+       MALLOC(new_data, ushort, bm->bm_w * bm->bm_h * 2);
        if (new_data == NULL)
            return IFF_NO_MEM;
 

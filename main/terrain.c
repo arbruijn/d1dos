@@ -495,8 +495,7 @@ build_light_table()
 	else
 		atexit(free_light_table);		//first time
 
-	//MALLOC(light_array,ubyte,grid_w*grid_h); //Won't comile -KRB
-	light_array = (ubyte *)malloc(grid_w*grid_h+(sizeof(ubyte))); //my hack -KRB
+	MALLOC(light_array,ubyte,grid_w*grid_h);
 	for (i=1;i<grid_w;i++)
 		for (j=1;j<grid_h;j++) {
 			l = get_avg_light(i,j);

@@ -95,11 +95,8 @@ void Int3();
 #else					//macros for real game
 
 #pragma aux Error aborts;
-//Changed Assert and Int3 because I couldn't get the macros to compile -KRB
-//#define Assert(__ignore) ((void)0)
-void Assert(int expr);
-//#define Int3() ((void)0)
-void Int3();
+#define Assert(__ignore) ((void)0)
+#define Int3() ((void)0)
 #endif
 
 

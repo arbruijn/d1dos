@@ -96,8 +96,8 @@ COPYRIGHT 1993-1998 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
 
 #pragma pack (4);						// Use 32-bit packing!
 #pragma off (check_stack);			// No stack checking!
-//#include "sos.h"//These sos headers are part of a commercial library, and aren't included-KRB
-//#include "sosm.h"
+#include "sos.h"
+#include "sosm.h"
 
 #pragma off (unreferenced)
 static char rcsid[] = "$Id: config.c 2.2 1995/03/27 09:42:59 john Exp $";
@@ -324,7 +324,7 @@ int ReadConfigFile()
 		if ( !(tmp & 0x80) )
 			atexit( CrystalLakeSetSB );		// Restore to SB when done.
 	 	CrystalLakeSetWSS();
-		digi_driver_board = 0;//_MICROSOFT_8_ST;<was this microsoft thing, but its irrelevant, because we have no sound here yet,being that its also undefined, I set it to 0 -KRB
+		digi_driver_board = _MICROSOFT_8_ST;
 	}
 
 	return 0;

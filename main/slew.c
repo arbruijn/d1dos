@@ -120,6 +120,8 @@ COPYRIGHT 1993-1998 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
 static char rcsid[] = "$Id: slew.c 2.0 1995/02/27 11:29:32 john Exp $";
 #pragma on (unreferenced)
 
+#ifdef SLEW_ON
+
 //variables for slew system
 
 object *slew_obj=NULL;	//what object is slewing, or NULL if none
@@ -249,3 +251,4 @@ int slew_frame(int check_keys)
 
 }
 
+#endif
