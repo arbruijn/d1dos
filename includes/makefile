@@ -25,7 +25,4 @@ TEST_PROGS = test
 TEST_SRCS = test.c mactest.c
 TEST_LIBS = io.lib
 
-
-mactest.obj: psmacros.inc
-
-test.obj: mono.h
+!include ..\wmake.def

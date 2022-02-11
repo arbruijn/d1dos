@@ -30,10 +30,5 @@ TEST_PROGS = vectest
 # What object files and libs for the test programs
 VECTEST_SRCS = vectest.c
 VECTEST_LIBS = vecmat.lib io.lib fix.lib
-vecmat.lib: $(VECMAT_OBJS)
-	wlib vecmat.lib $(VECMAT_OBJS)
-	copy *.lib $(LIBDIR)
-vecmat.obj: vecmat.inc vecmat.asm
-	masm vecmat.asm;
 
-vectest.obj: fix.h stdio.h types.h vecmat.h
+!include ..\wmake.def

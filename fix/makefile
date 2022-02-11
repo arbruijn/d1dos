@@ -31,16 +31,4 @@ FIX_OBJS = fix.obj
 FIXTEST_SRCS = fixtest.c
 FIXTEST_LIBS = fix.lib io.lib
 
-fix.lib: $(FIX_OBJS)
-	wlib fix.lib $(FIX_OBJS)
-	copy *.lib $(LIBDIR)
-asingen.obj: math.h stdio.h
-
-fix.obj: fix.inc fix.asm
-	masm fix.asm
-
-fixtest.obj: conio.h fix.h graph.h stdio.h stdlib.h types.h
-
-singen.obj: math.h
-
-test.obj: psmacros.inc
+!include ..\wmake.def

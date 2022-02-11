@@ -37,3 +37,4 @@ iff15bpp.obj:
 testp.obj: 
 
 tga.obj: 
+!include ..\wmake.def

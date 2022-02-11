@@ -22,7 +22,7 @@ COPYRIGHT 1993-1998 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
 //#define ARCADE			//Arcade (ATW) code is OUT 
 //#define DEMO_ONLY		//Game is playable 
 //#define NDEBUG  1			//NDEBUG is ON 
-#define NMONO  			//NMONO is ON 
+#define NMONO 1  			//NMONO is ON 
 //#define _MARK_ON		//MARKS are OFF 
 //#define PASSWORD		//PASSWORD is OFF 
 //#define STORE_DEMO 1	//STORE_DEMO is OFF 

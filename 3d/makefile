@@ -20,7 +20,7 @@ INSTALL_TARGS = 3d.lib 3d.h 3d.inc
 LIBS = 3d
 
 # What objs in the lib
-3D_OBJS = globvars.obj setup.obj matrix.obj points.obj draw.obj clipper.obj \
+3D_OBJS = globvars.obj setup.obj matrix.obj points.obj draw.obj clipper.obj &
 	horizon.obj instance.obj rod.obj interp.obj
 
 # What test programs to make
@@ -32,50 +32,4 @@ TEST_PROGS = 3dtest
 
 #rules and targets common to all Miner makefiles
 
-3d.lib: $(3D_OBJS)
-	wlib 3d.lib $(3D_OBJS)
-	copy *.lib $(LIBDIR)
-3dtest.obj: 3dtest.c
-	wcc386 $(CCFLAGS) 3dtest.c
-
-clipper.obj: clipper.asm
-	masm clipper.asm clipper.obj
-draw.obj: draw.asm
-	masm draw.asm draw.obj
-globvars.obj: globvars.asm
-	masm globvars.asm globvars.obj
-horizon.obj: horizon.asm
-	masm horizon.asm horizon.obj
-instance.obj: instance.asm 
-	masm instance.asm instance.obj
-
-interp.obj: interp.asm
-	masm interp.asm interp.obj
-matrix.obj: matrix.asm
-	masm matrix.asm matrix.obj
-
-objects.obj: objects.asm
-	masm objects.asm objects.obj
-
-out.obj: out.asm
-	masm out.asm out.obj
-
-points.obj: points.asm
-	masm points.asm points.obj
-
-rod.obj: rod.asm
-	masm rod.asm rod.obj
-
-segment.obj: segment.asm
-	masm segment.asm segment.obj
-
-setup.obj: setup.asm
-	masm setup.asm setup.obj
-
-#trakball.obj: trackball.asm
-
-upvecs.obj: upvecs.asm
-	masm upvecs.asm upvecs.obj
-
-upvecs2.obj: fix.h types.h vecmat.h
-
+!include ..\wmake.def

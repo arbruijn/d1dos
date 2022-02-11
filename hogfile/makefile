@@ -16,3 +16,4 @@ PROGS = hogfile
 HOGFILE_SRCS = hogfile.c 
 
 
+!include ..\wmake.def

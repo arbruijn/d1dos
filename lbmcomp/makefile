@@ -21,3 +21,4 @@ LBMCOMP_LFLAGS = option stack=150k
 
 
 
+!include ..\wmake.def

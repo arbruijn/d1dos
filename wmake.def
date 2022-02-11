@@ -1,0 +1,59 @@
+.EXTENSIONS:
+.EXTENSIONS: .exe .obj .c .asm
+
+all: lsub lmakelib linstallh .SYMBOLIC
+!ifdef SUBSYSTEMS
+lsub: $(SUBSYSTEMS) .SYMBOLIC
+
+$(SUBSYSTEMS): .SYMBOLIC
+	cd $@
+	wmake $(%SUBTARG)
+	cd ..
+!else
+lsub: .SYMBOLIC
+!endif
+!ifdef LIBS
+lmakelib: $(LIBS).lib .SYMBOLIC
+
+$(LIBS).lib: $($(LIBS)_OBJS)
+	*wlib $@ $<
+!else
+lmakelib: .SYMBOLIC
+!endif	
+
+!ifdef INSTALL_TARGS
+linstallh: .SYMBOLIC
+	for %i in ($(INSTALL_TARGS)) do if exist %i copy %i ..\lib
+!else
+linstallh: .SYMBOLIC
+!endif
+
+!ifndef LCLEAN
+lclean: .SYMBOLIC
+!endif
+
+OPT_FLAGS =/ox /oe /ot
+CFLAGS_OPT=$(OPT_FLAGS) /5r
+CFLAGS_STACK = /s
+CFLAGS_INCPATH = -i=..\lib -i=..\external -i=.
+CFLAGS_DEBUG=/dNDEBUG=1
+CFLAGS_MONO=/dNMONO=1
+CFLAGS = /d1 /zq /zld /w3 /on /oa $(CFLAGS_INCPATH) $(CFLAGS_DEBUG) $(CFLAGS_OPT) $(GLOBAL_CFLAGS) $(CFLAGS_STACK) $(CFLAGS_MONO)
+!ifdef __NT__
+CFLAGS += -u__NT__ -u_WIN32 -uWIN32
+!endif
+AFLAGS_DEBUG = /DNDEBUG /DNMONO
+AFLAGS_INCPATH = /I..\lib
+AFLAGS = /c /W3 /Zd /nologo $(AFLAGS_INCPATH) $(AFLAGS_DEBUG) $(GLOBAL_AFLAGS)
+ 
+.c.obj:
+	wcc386 $(CFLAGS) $<
+.asm.obj:
+	ml $(AFLAGS) $<
+
+clean: .SYMBOLIC
+	del /q *.obj
+	del /q *.lib
+	set SUBTARG=clean
+	%make lsub
+	%make lclean

@@ -1,0 +1,10 @@
+*.obj
+*~
+*.lib
+*.exe
+main/*.map
+*.err
+*.bak
+binextr
+!binextr/
+.gdb_history

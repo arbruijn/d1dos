@@ -31,13 +31,4 @@ IFFTEST_LIBS = iff.lib gr.lib mem.lib bm.lib misc.lib cflib.lib cfile.lib
 IFFTESTV_SRCS = ifftestv.c
 IFFTESTV_LIBS = iff.lib vesa.lib cflib.lib cfile.lib
 
-iff.lib: $(IFF_OBJS)
-	wlib iff.lib $(IFF_OBJS)
-	copy *.lib $(LIBDIR)
-iff.obj: iff.c
-	wcc386 $(CCFLAGS) iff.c
-
-ifftest.obj: conio.h fix.h gr.h iff.h stdio.h stdlib.h types.h
-
-ifftestv.obj: conio.h fix.h gr.h iff.h stdio.h types.h vesa.h
-
+!include ..\wmake.def

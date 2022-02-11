@@ -31,10 +31,4 @@ DIV0_OBJS =  div0.obj
 TESTD_SRCS = testd.c testda.asm
 TESTD_LIBS = div0.lib
 
-div0.lib: $(DIV0_OBJS)
-	wlib div0.lib $(DIV0_OBJS)
-	copy *.lib $(LIBDIR)
-div0.obj: div0.asm
-	masm div0.asm
-
-testd.obj: 
+!include ..\wmake.def
