@@ -1,0 +1,34 @@
+#lib loadpats.lib
+#bssalign para
+lpbase loadpats_ret1:loadpats_+206, loadpats_spin:loadpats_msg_error+13, lp_banner_shown:lp_spin_idx+4, lp_base_data1:lp_base_rest+260 #bssalign dword
+lpinit loadpats_init:loadpats_poke_block+23, lp_msg_no_read_env:lp_msg_no_perc_patch+52, loadpats_did_card_init:loadpats_ini_idx+4, loadpats_dword_buf:loadpats_ultradir+256 #bssalign dword
+gf1utils gf1_GetUltraCfg_:gf1_GetUltraCfg_+258, _gf1_ultrasnd:_gf1_ultrasnd+9, _gf1_ultrasnd_ptr:_gf1_ultrasnd_ptr+4, _gf1_ustr:_gf1_ustr+4 #bssalign dword
+gf1init gf1_clear_ints_:gf1_reset_ultra_+825, 0:0, _gf1_os_loaded:_gf1_irq_latch+16, _gf1_old_service:_gf1_old_midi_service+6
+gf1error gf1_error_str_switch:gf1_error_str_+201, gf1_msg_ok:gf1_msg_unk+14
+gf1mem gf1_write_block_:gf1_mem_largest_avail_+116, 0:0, 0:0, _gf1_bank:_gf1_bank+2
+gf1wmem _gf1_mem_init_data:_gf1_mem_init_data+1:_DATA:DATA:word, 0:0:_GF1INITS:DATA:word, !gf1_InitStart:gf1_InitStart+6:_GF1INIT:DATA:word, 0:0:_GF1INITE:DATA:word
+gf1patch gf1_get_patch_info_:gf1_detune_patch_+11, gf1_patch_id:gf1_patch_id2+4
+gf1dram gf1_peek_:gf1_good_dram_+426, 0:0, 0:0, 0:0
+gf1glob 0:0, 0:0, _gf1_pstatus:_gf1_dma_latch+8, _gf1_status:_gf1_irq+1 #bssalign dword
+gf1os gf1_os_init_channel_:gf1_os_eoi_+43, 0:0, _gf1_os_data1:_gf1_os_irq_table+128, _gf1_os_dma_parms:_gf1_os_dma_parms+34
+gf1wisr gf1_irq_service_:gf1_midi_irq_service_+126, 0:0, _gf1_midi_semaphore:_gf1_midi_semaphore+4
+gf1init2 gf1_delay_-5:gf1_init_ports_+74,0:0, _gf1_init2_data1:_gf1_init2_data1+4 #textalign dword #externdef _gf1_freq_divisor
+gf1sem gf1_init_semaphores_:gf1_leave_+54, 0:0, _gf1_num_sems:_gf1_num_sems+22 #textalign dword
+gf1isr gf1_isr_init_:gf1_process_interrupt_+661, 0:0, _gf1_isr_midi_semaphore:_gf1_midi_recv_handler+4, _gf1_adlib_control:_gf1_adlib_control+4
+gf1detct gf1_detect_card_:gf1_detect_card_+95
+gf1ainit gf1_asm_init_:gf1_asm_init_+107, 0:0, 0:0, gf1_InitStart:gf1_InitStart:_GF1INITS:DATA:word, 0:0:_GF1INIT:DATA:word, gf1_InitEnd:gf1_InitEnd:_GF1INITE:DATA:word #endlabel #textalign dword
+gf1dma gf1_set_channel_out_:gf1_stop_dma_+136, 0:0, _gf1_dma_active:_gf1_dma_active+4, _gf1_dma_par_cur_addr:_gf1_dma_par_flags+2
+gf1wdma _gf1_freq_divisor:_gf1_dma_init_data+1:_DATA:DATA:dword, gf1_InitDMA:gf1_InitDMA+6:_GF1INIT:DATA:word
+#gf1wdma _gf1_dma_init_data:_gf1_dma_init_data+1:_DATA:DATA:word, gf1_InitDMA:gf1_InitDMA+6:_GF1INIT:DATA:word
+#gf1volt 0:0, 0:0, _gf1_vol_table:_gf1_vol_table+128
+gf1wave gf1_update_waveform_:gf1_update_waveform_+331 #symofs _gf1_freq_divisor-28
+#gf1note gf1_note_init_:gf1_midi_all_notes_off_+117, 0:0, _gf1_log_table:_gf1_linear_volumes+1, _gf1_note_status:_gf1_vibrato_voice_count+2
+gf1note gf1_note_init_:gf1_midi_all_notes_off_+117, 0:0, _gf1_vol_table:_gf1_linear_volumes+1, _gf1_note_status:_gf1_vibrato_voice_count+2
+#gf1div 0:0, 0:0, _gf1_freq_divisor:_gf1_freq_divisor+38
+gf1wnote _gf1_note_init_data:_gf1_note_init_data+1:_DATA:DATA:word, gf1_InitNote:gf1_InitNote+6:_GF1INIT:DATA:word
+gf1addr gf1_convert_to_16bit_:gf1_make_physical_address_+89
+gf1timer gf1_timer_init_:gf1_disable_timer2_+106, 0:0, 0:0, _gf1_adlib_timer_mask:_gf1_adlib_timer_mask+4
+gf1wtmr _gf1_timer_init_data:_gf1_timer_init_data+1:_DATA:DATA:word, gf1_InitTimer:gf1_InitTimer+6:_GF1INIT:DATA:word
+gf1scale 0:0, 0:0, _gf1_scale_table:_gf1_scale_table+512
+gf1voice gf1_voice_init_:gf1_adjust_priority_+103, 0:0, _gf1_age:_gf1_age+4, _gf1_voice_array:_gf1_voice_mask+4
+gf1wvoic _gf1_voice_init_data:_gf1_voice_init_data+1:_DATA:DATA:word, gf1_InitVoice:gf1_InitVoice+6:_GF1INIT:DATA:word

@@ -1,0 +1,30 @@
+#lib commlib.lib
+D_GETM GetDsr_:GetCts_+17
+CHGPRI Change8259Priority_:Change8259Priority_+55
+FASTA386 _GetModemStatusGreenleafFast_:FastSet16550UseTXFifos_+6, 0:0, _isa_uart_addresses:_FastUse16550TXFifos+4, 0:0 #bssalign para
+FAST_SP  FastSavePortParameters_:FastRestorePortParameters_+206, 0:0, 0:0, _saved_divisor_latch_1:_saved_mcr+0x20 #bssalign para
+D_RCT ReadCharTimed_:ReadCharTimed_+69
+MODEM HMReset_:HMSetLineFeedCharacterVB_+17, _hm_ATZ:_hm_empty_str+1, _hm_delay_value:__hm_abort_key+4, 0:0 #bssalign para
+CLEARRX ClearRXBuffer_:ClearRXBuffer_+44, 0:0, 0:0, 0:0 #bssalign para
+D_RBT ReadBufferTimed_:ReadBufferTimed_+134, 0:0, 0:0, 0:0 #bssalign para
+WAT386 _FarMemSet_:_GetDs_+12, 0:0, 0:0, _gl_dummy:_gl_dummy+4 #bssalign para
+TIMER timer_:PortKillTime_+37
+IRQ386 HookInterrupt_:_GetInterruptData_+112, 0:0, _gl_irq386_1:_gl_irq386_2+4, _IrqDataPtr32:_RealBlockPtr32+6 #bssalign para
+DPMI386 _GetCSAlias_:_LockRegion_+191, 0:0, _gl_dpmi386_1:_gl_dpmi386_2+2
+DRIVERS _GenericNotSupportedA_:_OutOfMemoryPort_+69, _gl_msg_no_port_dump:_gl_msg_no_port_dump+42, _PortList:_hooked+4, _gl_drivers_1:_gl_drivers_rest+116 #bssalign para
+ISMIC386 IsMicroChannel_:IsMicroChannel_+333, 0:0, _gl_ismic386_1:_gl_ismic386_1+4, 0:0 #bssalign para
+GFC_MEM AllocateGreenleafPortStructure_:FreeRXBuffer_+21, 0:0, 0:0, 0:0 #bssalign para
+FASTD386 _DumpChipData_:_DumpPortStatusGreenleafFast_+162, _gl_chipdata_msg1:_gl_dump_port_msg+27, 0:0, 0:0 #bssalign para
+TIMER386  ElapsedTime_:ElapsedTime_+128, 0:0, _gl_timer386_1:_gl_timer386_2+4, 0:0 #bssalign para
+IDLEFDOS  _DOSDefaultIdleFunction_:SetPortIdleFunctionPtr_+6, 0:0, __PortIdleFunctionPtr: __PortIdleFunctionPtr+4, 0:0 #bssalign para
+D_WS WriteString_:WriteString_+113
+MABRTDOS _DOSDefaultAbortModemFunction_:SetAbortModemFunctionPtr_+6, 0:0, __AbortModemFunctionPtr:__AbortModemFunctionPtr+4, 0:0 #bssalign para
+KBD386 exit_function_:__disenk+9, 0:0, _gl_kbd386_initialized:__kbd_i1b_count+4
+KSTAT386 _gf_kbd_status:_kbd_int_handler+14, 0:0:PISRDATA:DATA #textalign dword
+ASGETDI _asgetdivisor_:_asgetdivisor_+150
+WINUTIL  WindowsEnhancedMode_:YieldDESQViewTimeSlice_+42, 0:0, _gl_winutil_1:_gl_winutil_3+4, 0:0 #bssalign para
+IRQDR386 __SegmentStartRR16:__SegmentEndRR16+4:REAL_RELOCATED_16:CODE #textdata #textalign dword
+STI386 0:0:REAL_RELOCATED_16:CODE,0:0:PISR_START:CODE,__assti:__asoutb+22:PISRCODE:CODE #textalign byte #textname PISRCODE
+IRQDP386 __SegmentStartPC32:__SegmentStartPC32+1:PISR_START:CODE,__GreenleafFastIsr:__prot_irq_stub_9_PC32+11:PISRCODE:CODE,__SegmentEndPC32:__SegmentEndPC32+1:PISR_END:CODE, __SegmentStartPD32:__SegmentEndPD32:PISRDATA:DATA #endlabel #textalign byte #textname PISRCODE
+KILL386 __asi_kill_time:__asi_kill_time+1:PISRCODE:CODE #textalign byte
+DEBUG386 __foo:__foo+1:PISRCODE:CODE, __DgroupSelectorPD32:__VideoCursorPD32+6:PISRDATA:DATA #textalign byte
