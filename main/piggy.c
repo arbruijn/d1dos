@@ -360,7 +360,7 @@ static char rcsid[] = "$Id: piggy.c 2.10 1995/10/07 13:17:26 john Exp $";
 #include "rle.h"
 #include "screens.h"
 
-//#include "soscomp.h"
+#include "soscomp.h"
 
 #include "piggy.h"
 #include "texmerge.h"

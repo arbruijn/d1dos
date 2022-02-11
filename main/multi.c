@@ -63,30 +63,14 @@ static char rcsid[] = "$Id: multi.c 2.10 1995/05/29 16:18:26 john Exp $";
 #include "newdemo.h"
 #include "text.h"
 #include "kmatrix.h"
-//#include "glfmodem.h"//This and the next file aren't part of the public release -KRB
-//#include "commlib.h"
+#include "glfmodem.h"
+#include "commlib.h"
 #include "multibot.h"
 #include "gameseq.h"
 #include "physics.h"
 #include "config.h"
 #include "state.h"
 
-//*******************************************
-typedef struct  {
-	char buffer[256];
-	unsigned char write_index;
-	unsigned char read_index;
-} BUFFER;
-
-typedef struct  {
-	void (interrupt far * old_vector)();
-	int uart_base;
-	int irq_mask;
-	int interrupt_number;
-	BUFFER in;
-	BUFFER out;
-} PORT; //I added this from serial.c, it will compile, but I doubt it works. -KRB
-//*******************************************
 //
 // Local macros and prototypes
 //

@@ -41,11 +41,9 @@ COPYRIGHT 1993-1998 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
  * 
  */
 
-extern int show_mem_info;//moved out of the ifdef by KRB
-
 #ifndef NDEBUG
 
-//extern int show_mem_info;
+extern int show_mem_info;
 
 void * mem_display_blocks();
 extern void * mem_malloc( unsigned int size, char * var, char * file, int line, int fill_zero );

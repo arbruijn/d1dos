@@ -1135,9 +1135,7 @@ int main(int argc,char **argv)
 	if (!dpmi_lock_region(&descent_critical_errcode,sizeof(unsigned)))	{
 		Error( "Unable to lock critial error handler" );
 	}
-	_harderr((void *) descent_critical_error_handler );
-	//Above line modified by KRB, added (void *) cast
-	//for the compiler.
+	_harderr( descent_critical_error_handler );
 
 #ifdef USE_CD
 	i=find_descent_cd();
@@ -1716,7 +1714,7 @@ int main(int argc,char **argv)
 
 	#ifndef NDEBUG
 	if ( FindArg( "-showmeminfo" ) )
-//		show_mem_info = 1;		// Make memory statistics show
+		show_mem_info = 1;		// Make memory statistics show
 	#endif
 
 	return(0);		//presumably successful exit
