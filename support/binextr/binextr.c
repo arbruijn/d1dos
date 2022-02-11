@@ -60,13 +60,15 @@ const char *sizename[] = {"near", "byte", "word", NULL, "dword", NULL, "fword", 
 
 typedef struct memblock {
     int s, e;
+    int no_label;
 } memblock;
 
 int opt_dis;
 int memblock_count;
-memblock memblocks[4];
+memblock memblocks[8];
 
-memblock gmemblocks[4] = {{0x10000, 0xf0000}, {0xf0000, 0xf8f0c}, {0xf8f0c,0x110f30}, {0x110f30, 0x02c83e4}};
+//memblock gmemblocks[4] = {{0x10000, 0xf0000}, {0xf0000, 0xf8f0c}, {0xf8f0c,0x110f30}, {0x110f30, 0x02c83e4}};
+memblock gmemblocks[4] = {{0x10000, 0xb0000}, {0xb0000, 0xb48a4}, {0xb48a4,0xc6fc0}, {0xc6fc0, 0x223ac0}};
 
 const char *def_block_names[] = {"_TEXT:CODE", "CONST:DATA", "_DATA:DATA", "_BSS:BSS"};
 const char *block_names[8];
@@ -132,24 +134,23 @@ int find_memblock(int ofs) {
 }
 
 vec_int extdefs;
+int noout, outext;
 void add_externdef(int nofs, const char *name, int size, FILE *out, int *hasline) {
     int_int ab; ab.a = nofs; ab.b = size;
     if (!set_int_int_find(&data_set, ab)) {
         set_int_int_insert(&data_set, ab);
-        vec_int_push_back(&extdefs, nofs);
-        /*
-        if (hasline && *hasline)
-            fprintf(out, "\n"), *hasline = 0;
-        fprintf(out, "\texterndef %s:%s\n", name, sizename[size]);
-        */
+        if (outext) {
+            if (hasline && *hasline)
+                fprintf(out, "\n"), *hasline = 0;
+            fprintf(out, "\texterndef %s:%s\n", name, sizename[size]);
+        } else
+            vec_int_push_back(&extdefs, nofs);
     }
 }
 
 void memname(char *buf, int ofs, int size, FILE *out, int *hasline) {
     int nofs, mem_block;
     const char *name;
-    if (ofs == 0x6a2b1)
-        printf("memname %x\n", ofs);
     if ((name = binmap_find_ofs(symofs, ofs))) { // specific base+ofs
         char nbuf[64];
         char *p = skipalnum(name);
@@ -192,7 +193,7 @@ void memname(char *buf, int ofs, int size, FILE *out, int *hasline) {
         sprintf(buf, "%s + 0%xh", name, ofs - nofs);
 }
 
-void dumpmem(FILE *out, int s, int e) {
+void dumpmem(FILE *out, int s, int e, int no_label) {
     char buf[256];
     int i;
     for (i = s; i < e; ) {
@@ -201,24 +202,29 @@ void dumpmem(FILE *out, int s, int e) {
             next = i + 16;
         while (i < next) {
             const char *name = binmap_find_ofs(binmap, i - base_int);
-            if (name) {
+            if (name && !no_label && !noout) {
                 if (hasdb)
                     fprintf(out, "\n"), hasdb = 0;
                 fprintf(out, "\tpublic %s\n%s:\n", name, name);
             }
             if (reloc_find(reloc, i - base_int)) {
                 memname(buf, trg_int(i), 0, out, &hasdb);
-                if (hasdb)
-                    fprintf(out, "\n"), hasdb = 0;
-                fprintf(out, "\tdd %s\n", buf);
+                if (!noout) {
+                    if (hasdb)
+                        fprintf(out, "\n"), hasdb = 0;
+                    fprintf(out, "\tdd %s\n", buf);
+                }
                 i += 4;
                 continue;
             }
-            if (hasdb)
-                fprintf(out, ",");
-            else
-                fprintf(out, "\tdb "), hasdb = 1;
-            fprintf(out, "0%02xh", trg_byte(i++));
+            if (!noout) {
+                if (hasdb)
+                    fprintf(out, ",");
+                else
+                    fprintf(out, "\tdb "), hasdb = 1;
+                fprintf(out, "0%02xh", trg_byte(i));
+            }
+            i++;
         }
         if (hasdb)
             fprintf(out, "\n");
@@ -394,14 +400,14 @@ void disassemble_rel(FILE *out, int pos, int spos, int epos) {
     int rel, len, opos;
 
     const char *name = binmap_find_ofs(binmap, pos - base_int);
-    if (name) {
+    if (name && !noout) {
         fprintf(out, "\tpublic %s\n", name);
         fprintf(out, "%s:\n", name);
     }
 
     c = trg_byte(pos);
     if (c == 0xc3) {
-        fprintf(out, "\tretn\n");
+        if (!noout) fprintf(out, "\tretn\n");
         return;
     }
     if (c != 0xe8 && c != 0xe9 && c != 0xeb)
@@ -425,7 +431,7 @@ void disassemble_rel(FILE *out, int pos, int spos, int epos) {
         else
             sprintf(buf + strlen(buf), "0%xh", opos);
     }
-    fprintf(out, "\t%s\n", buf);
+    if (!noout) fprintf(out, "\t%s\n", buf);
 }
 #endif
 
@@ -452,11 +458,11 @@ int gencode(FILE *out, int spos, int epos) {
         if (reloc_find(reloc, pos - base_int)) {
             const char *name = binmap_find_ofs(binmap, pos - base_int);
             if (name) {
-                fprintf(out, "\tpublic %s\n", name);
-                fprintf(out, "%s:\n", name);
+                if (!noout) fprintf(out, "\tpublic %s\n", name);
+                if (!noout) fprintf(out, "%s:\n", name);
             }
             memname(buf, trg_int(pos), 0, out, NULL);
-            fprintf(out, "\tdd %s\n", buf);
+            if (!noout) fprintf(out, "\tdd %s\n", buf);
             pos += 4;
             continue;
         }
@@ -470,15 +476,15 @@ int gencode(FILE *out, int spos, int epos) {
                         pos++;
                         i++;
                     }
-                    dumpmem(out, pos - i, pos);
+                    dumpmem(out, pos - i, pos, 0);
                 } else if (pos + 2 <= epos &&
                     trg_byte(pos) == 0x8b && trg_byte(pos + 1) == 0xc0) {
-                    fprintf(out, "\tdb 8bh,0c0h\n");
+                    if (!noout) fprintf(out, "\tdb 8bh,0c0h\n");
                     pos += 2;
                 } else if (pos + 3 <= epos &&
                     trg_byte(pos) == 0x8d && trg_byte(pos + 1) == 0x40 &&
                     trg_byte(pos + 2) == 0) {
-                    fprintf(out, "\tdb 8dh,040h,0\n");
+                    if (!noout) fprintf(out, "\tdb 8dh,040h,0\n");
                     pos += 3;
                 } else
                     break;
@@ -500,7 +506,7 @@ int gencode(FILE *out, int spos, int epos) {
 
         c = trg_byte(pos);
         if (!opt_dis && c != 0xe9 && c != 0xe8 && c != 0xeb && c != 0xc3) {
-            dumpmem(out, pos, pos + len);
+            dumpmem(out, pos, pos + len, 0);
             pos += len;
             continue;
         }
@@ -535,31 +541,56 @@ void write_extdefs(FILE *out, int s, int e) {
 }
 
 int genfile(FILE *out, int text_data, const char *text_align, const char *text_name, int end_label,
-    const char *bss_align) {
+    const char *bss_align, const char *externdef, int oldext) {
     int b, i;
     int has_dgroup = 0;
 
     vec_int_clear(&extdefs);
-    // scan data reloc references
-    for (b = 1; b < 3; b++)
-        for (i = memblocks[b].s; i < memblocks[b].e; i++)
-            if (reloc_find(reloc, i - base_int)) {
-                char buf[256];
-                memname(buf, trg_int(i), 4, out, NULL);
-            }
 
-    fprintf(out, ".386\n");
-    //fprintf(out, ".model flat\n");
+    fprintf(out, ".386p\n");
+
+    // scan data reloc references
+    if (!oldext)
+        outext++;
+    for (b = 0; b < memblock_count; b++) {
+        const char *name = block_names[b];
+        const char *p = strchr(name, ':');
+        const char *p2 = strchr(p + 1, ':');
+        if (!p2)
+            p2 = strchr(p + 1, 0);
+        if (p2 - p == 5 && memcmp(p, ":CODE", 5) == 0 && !text_data) {
+            if (oldext)
+                continue;
+            noout++;
+            if (gencode(out, memblocks[b].s, memblocks[b].e))
+                goto err;
+            noout--;
+        } else {
+            for (i = memblocks[b].s; i < memblocks[b].e; i++)
+                if (reloc_find(reloc, i - base_int)) {
+                    char buf[256];
+                    memname(buf, trg_int(i), 1, out, NULL);
+                }
+        }
+    }
+    if (!oldext)
+        outext--;
+    if (externdef)
+        fprintf(out, "\texterndef %s:%s\n", externdef, sizename[0]);
 
     for (i = 0; i < memblock_count; i++) {
         const char *name = block_names[i];
-        int l = strlen(name);
-        if (l > 5 && strcmp(name + l - 5, ":DATA") == 0) {
+        const char *p = strchr(name, ':');
+        const char *p2 = strchr(p + 1, ':');
+        if (!p2)
+            p2 = strchr(p + 1, 0);
+        if ((p2 - p == 5 && memcmp(p, ":DATA", 5) == 0) ||
+            (p2 - p == 4 && memcmp(p, ":BSS", 5) == 0)) {
             if (!has_dgroup)
                 fprintf(out, "DGROUP group "), has_dgroup = 1;
             else
                 fprintf(out, ", ");
-            fprintf(out, "%.*s", l - 5, name);
+            fprintf(out, "%.*s", (int)(p - name), name);
         }
     }
     if (has_dgroup)
@@ -569,24 +600,30 @@ int genfile(FILE *out, int text_data, const char *text_align, const char *text_n
         const char *name = block_names[i];
         const char *p = strchr(name, ':');
         const char *cls = p + 1;
-        int iscode = strcmp(cls, "CODE") == 0;
-        int isbss = strcmp(cls, "BSS") == 0;
-        fprintf(out, "%.*s\tsegment %s public use32 '%s'\n", (int)(p - name), name,
-            iscode ? text_align : isbss ? bss_align : "dword",
-            cls);
+        const char *clse = strchr(cls, ':') ? strchr(cls, ':') : strchr(cls, 0);
+        int iscode = clse - cls == 4 && memcmp(cls, "CODE", 4) == 0;
+        int isdata = clse - cls == 4 && memcmp(cls, "DATA", 4) == 0;
+        int isbss = clse - cls == 3 && memcmp(cls, "BSS", 3) == 0;
+        fprintf(out, "%.*s\tsegment %s public use32 '%.*s'\n",
+            (int)(p - name), name,
+            *clse ? clse + 1 : 
+                iscode ? text_align : isbss ? bss_align : "dword",
+            (int)(clse - cls), cls);
         
-        if (memblocks[i].s != memblocks[i].e) {
-            if (strcmp(cls, "CODE") == 0 && !text_data) {
+        if (1) { //memblocks[i].s != memblocks[i].e || (end_label && memblocks[i].s)) {
+            if (iscode && !text_data) {
                 if (gencode(out, memblocks[i].s, memblocks[i].e))
                     goto err;
             } else {
-                fprintf(out, "block%d:\n", i);
-                if (memcmp(name, "_BSS", 4) == 0)
+                if (!memblocks[i].no_label)
+                    fprintf(out, "block%d:\n", i);
+                if (isbss)
                     dumpbss(out, &memblocks[i]);
                 else
-                    dumpmem(out, memblocks[i].s, memblocks[i].e);
+                    dumpmem(out, memblocks[i].s, memblocks[i].e,
+                        memblocks[i].no_label);
             }
-            if (end_label && strcmp(cls, "DATA") == 0) {
+            if (end_label && isdata) {
                 const char *name;
                 if ((name = binmap_find_ofs(binmap, memblocks[i].e - base_int))) {
                     fprintf(out, "public %s\n", name);
@@ -595,7 +632,8 @@ int genfile(FILE *out, int text_data, const char *text_align, const char *text_n
             }
         }
 
-        if (i < 4 && (strcmp(def_block_names[i], block_names[i]) == 0 ||
+        if (i < 4 && (!memblocks[i].s ||
+            strcmp(def_block_names[i], block_names[i]) == 0 ||
             strncmp(text_name, block_names[i], p - name) == 0)) {
             int gblk = strncmp(text_name, block_names[i], p - name) == 0 ? 0 : i;
             write_extdefs(out, gmemblocks[gblk].s, gmemblocks[gblk].e);
@@ -608,6 +646,7 @@ int genfile(FILE *out, int text_data, const char *text_align, const char *text_n
         const char *name = def_block_names[i];
         const char *p = strchr(name, ':');
         const char *cls = p + 1;
+        const char *clse = strchr(cls, ':') ? strchr(cls, ':') : strchr(cls, 0);
         int n = 0;
         //int iscode = strcmp(cls, "CODE") == 0;
         if (i < memblock_count &&
@@ -621,8 +660,9 @@ int genfile(FILE *out, int text_data, const char *text_align, const char *text_n
         if (!n)
             continue;
 
-        fprintf(out, "%.*s\tsegment byte public use32 '%s'\n",
-        	(int)(p - name), name, cls);
+        fprintf(out, "%.*s\tsegment byte public use32 '%.*s'\n",
+            (int)(p - name), name,
+            (int)(clse - cls), cls);
         write_extdefs(out, gmemblocks[i].s, gmemblocks[i].e);
         fprintf(out, "%.*s\tends\n", (int)(p - name), name);
     }
@@ -710,6 +750,7 @@ int read_def(const char *def_fn) {
     char line[512];
     char text_align_global[16], bss_align_global[16];
     const char *text_name_global = "_TEXT";
+    int oldext_global = 0;
     FILE *f;
     strcpy(text_align_global, "para");
     strcpy(bss_align_global, "dword");
@@ -722,9 +763,11 @@ int read_def(const char *def_fn) {
         char *p, *p2, *outname, c;
         int text_data = 0;
         int end_label = 0;
+        int oldext = oldext_global;
         const char *text_align = text_align_global;
         const char *text_name = text_name_global;
         const char *bss_align = bss_align_global;
+        const char *externdef = NULL;
         char *freestrs[8];
         int n_freestrs = 0;
         FILE *fo;
@@ -757,7 +800,11 @@ int read_def(const char *def_fn) {
                 }
                 if (strcmp(p, "textdata") == 0)
                     text_data = 1;
-                else if (strcmp(p, "endlabel") == 0)
+                else if (strcmp(p, "oldext") == 0) {
+                    oldext = 1;
+                    if (p == line + 1)
+                        oldext_global = oldext;
+                } else if (strcmp(p, "endlabel") == 0)
                     end_label = 1;
                 else if (strcmp(p, "textalign") == 0) {
                     char *p3 = skipalnum(arg);
@@ -778,9 +825,12 @@ int read_def(const char *def_fn) {
                     p2 = skipws(p3);
                     *p3 = 0;
                     text_name = arg;
+                } else if (strcmp(p, "externdef") == 0) {
+                    char *p3 = skipalnum(arg);
+                    p2 = skipws(p3);
+                    *p3 = 0;
+                    externdef = arg;
                 }
-                if (p == line + 1)
-                    strcpy(text_align_global, text_align);
                 p = p2;
             }
             *strchr(line, '#') = 0;
@@ -802,6 +852,10 @@ int read_def(const char *def_fn) {
         
         while (memblock_count < 8) {
             p = skipws(p);
+            if (*p == '!') {
+                memblocks[memblock_count].no_label = 1;
+                p++;
+            }
             if (parseint(&p, &memblocks[memblock_count].s)) {
                 fprintf(stderr, "in memblock %d in %s\n", memblock_count, line);
                 goto err;
@@ -821,6 +875,8 @@ int read_def(const char *def_fn) {
             if (*p == ':') {
                 p = skipws(p + 1);
                 p2 = skipalnum(p);
+                if (*p2 == ':')
+                    p2 = skipalnum(skipws(p2 + 1));
                 if (*p2 == ':')
                     p2 = skipalnum(skipws(p2 + 1));
                 c = *p2, *p2 = 0;
@@ -852,7 +908,8 @@ int read_def(const char *def_fn) {
             fprintf(stderr, "error creating %s\n", outname);
             goto err;
         }
-        genfile(fo, text_data, text_align, text_name, end_label, bss_align);
+        genfile(fo, text_data, text_align, text_name, end_label, bss_align,
+            externdef, oldext);
         fclose(fo);
         while (n_freestrs)
             free(freestrs[--n_freestrs]);
@@ -913,7 +970,7 @@ int read_fun(const char *fun) {
         goto err;
     }
     opt_dis = 1;
-    genfile(f, 0, "dword", "_TEXT", 0, "para");
+    genfile(f, 0, "dword", "_TEXT", 0, "para", NULL, 0);
     fclose(f);
     
     return 0;
@@ -927,7 +984,7 @@ int main(int argc, char **argv) {
     if (opt_parse(argc, argv))
         goto err;
 
-    if (!opt_exe || (!opt_def && !opt_fun)) {
+    if (!opt_def && !opt_fun) {
         fprintf(stderr, "syntax: -e prog.exe -m prog.map lib.def\n");
         goto err;
     }
