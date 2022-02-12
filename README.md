@@ -8,7 +8,8 @@ Descent 1.5 exe.
 
 The only differences in the resulting exe are different uninitialized padding bytes between strings and a different order for the relocation metadata.
 
-You'll need Watcom 9.5b, MASM 6.11, the Descent 1.5 exe and a DOS environment, for example DOSBox.
+You'll need Watcom 9.5b, MASM 6.11, the Descent 1.5 exe and a DOS(Box)/Win32/wine environment.
+For wine, patch wlink.exe with [this patch](https://gist.github.com/arbruijn/acea8253bf454e2e2f1f928ae1b7bc90).
 
 The Descent exe must be copied to the `original` directory.
 
